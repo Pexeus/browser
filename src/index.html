@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browser</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://css.gg/loadbar.css' rel='stylesheet'>
+    <link rel="stylesheet" href="snitched.css">
 </head>
 <body>
     <div id="head">
-        <div id="tabs">
-            <img id="newTab" src="./img/plus.png">
-        </div>
-
         <div id="windowControls">
             <div id="min">
                 <img src="./img/min.png" alt="">
@@ -22,6 +20,10 @@
             <div id="close">
                 <img src="./img/close.png" alt="">
             </div>
+        </div>
+
+        <div id="tabs">
+            <img id="newTab" src="./img/plus.png" onclick="newTab()">
         </div>
     </div>
     <div id="web">

@@ -5,6 +5,7 @@
     -webkit-app-region: no-drag;
     transition: all ease-in-out .2s;
     outline: none;
+    user-select: none;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 }
 
 #tabs {
-    height: calc(100% - 1px);
+    height: 30px;
     width: calc(100% - 110px);
     text-align: left;
     display: inline-block;
@@ -50,6 +51,13 @@ body {
     filter: invert(100%);
 }
 
+.loaderWrapper {
+    display: inline-block;
+    height: 100%;
+    margin-top: 13px;
+    padding-right: 12px;
+}
+
 .tab {
     display: inline-block;
     background-color: white;
@@ -66,6 +74,10 @@ body {
     cursor: default;
 }
 
+.tabActive {
+    background-color: #9ab2f525;
+}
+
 .tab p {
     line-height: 30px;
     height: 30px;
@@ -74,7 +86,17 @@ body {
     vertical-align: top;
 }
 
-.tab img {
+.tab #tabIcon {
+    height: calc(100% - 10px);
+    padding: 5px;
+    margin-right: 0;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    opacity: .8;
+}
+
+.tab #closeTab {
     height: calc(100% - 20px);
     padding: 5px;
     margin: 5px;
@@ -85,7 +107,7 @@ body {
     opacity: .8;
 }
 
-.tab img:hover {
+.tab #closeTab:hover {
     background-color: #654c0a;
     filter: invert(100%);
 }
@@ -121,4 +143,10 @@ body {
     height: calc(100vh - 30px);
     display: flex;
     z-index: 0;
+}
+
+.webview {
+    width: 100%;
+    height: 100%;
+    display: static;
 }

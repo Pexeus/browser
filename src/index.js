@@ -13,8 +13,6 @@ function closeTab(tab) {
 
 function newTab() {
     const id = Math.floor(Math.random() * Math.floor(1000))
-
-    head.tabs.new(id)
     web.views.new(id)
 
     storage.tabs.list[id] = {
@@ -23,6 +21,8 @@ function newTab() {
         tabID: "tab_" + id,
         viewID: "view_" + id
     }
+
+    head.tabs.new(id)
 }
 
 newTab()

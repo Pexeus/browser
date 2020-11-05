@@ -3,7 +3,7 @@
     padding: 0;
     font-family: Arial;
     -webkit-app-region: no-drag;
-    transition: all ease-in-out .2s;
+    transition: all ease-in-out .5s;
     outline: none;
     user-select: none;
 }
@@ -61,13 +61,14 @@ body {
 .tab {
     display: inline-block;
     background-color: white;
-    height: 100%;
+    height: calc(100% - 1px);
     box-shadow: 0px 0px 1px gray;
     margin: 0;
     padding-left: 12px;
     padding-right: 7px;
     line-height: 40px;
     vertical-align: top;
+    max-width: 500px;
 }
 
 .tab * {
@@ -86,14 +87,40 @@ body {
     vertical-align: top;
 }
 
+#loaderWrapper {
+    height: 100%;
+    display: inline-block;
+}
+
+#loaderWrapper i {
+    height: calc(100% - 10px);
+    margin: 5px;
+    margin-right: 8px;
+}
+
+.tab:hover > #tabControls {
+    opacity: 1;
+}
+
+#tabControls {
+    height: 100%;
+    display: none;
+    opacity: 0;
+}
+
+#tabControls i {
+    display: inline-block;
+}
+
 .tab #tabIcon {
     height: calc(100% - 10px);
     padding: 5px;
-    margin-right: 0;
+    margin-right: 8px;
     border-radius: 4px;
     display: inline-block;
     vertical-align: top;
     opacity: .8;
+    display: none;
 }
 
 .tab #closeTab {

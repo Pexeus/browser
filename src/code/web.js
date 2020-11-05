@@ -34,12 +34,34 @@ function newView(id) {
     view.classList.add("webview")
     view.src = "https://www.google.com/"
 
+    view.addEventListener("page-favicon-updated", () => {
+        let favIcon = "https://" + (new URL(view.src)).hostname + "/favicon.ico"
+
+        storage.tabs.list[id].icon = favIcon
+        storage.tabs.list[id].status = "idle"
+
+        head.tabs.update()
+    })
+
     view.addEventListener("dom-ready", () => {
         let favIcon = "https://" + (new URL(view.src)).hostname + "/favicon.ico"
 
-        storage.tabs.list[id].title = view.getTitle()
         storage.tabs.list[id].icon = favIcon
-        
+        storage.tabs.list[id].status = "idle"
+        storage.tabs.list[id].title = view.getTitle()
+
+        head.tabs.update()
+    })
+
+    view.addEventListener("did-start-loading", () => {
+        storage.tabs.list[id].status = "load-wait"
+
+        head.tabs.update()
+    })
+
+    view.addEventListener("load-commit", () => {
+        storage.tabs.list[id].status = "load-commit"
+
         head.tabs.update()
     })
 

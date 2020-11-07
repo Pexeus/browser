@@ -47,22 +47,30 @@ function newView(id) {
         let favIcon = "https://" + (new URL(view.src)).hostname + "/favicon.ico"
 
         storage.tabs.list[id].icon = favIcon
-        storage.tabs.list[id].status = "idle"
         storage.tabs.list[id].title = view.getTitle()
+
+        head.tabs.update()
+    })
+
+    view.addEventListener("did-stop-loading", () => {
+        storage.tabs.list[id].status = "idle"
 
         head.tabs.update()
     })
 
     view.addEventListener("did-start-loading", () => {
         storage.tabs.list[id].status = "load-wait"
+        storage.tabs.list[id].icon = undefined
 
         head.tabs.update()
     })
 
     view.addEventListener("load-commit", () => {
-        storage.tabs.list[id].status = "load-commit"
-
-        head.tabs.update()
+        if (storage.tabs.list[id].status != "idle") {
+            console.log(storage.tabs.list[id].status)
+            storage.tabs.list[id].status = "load-commit"
+            head.tabs.update()
+        }
     })
 
     vie.get("#web").appendChild(view)

@@ -3,7 +3,7 @@
     padding: 0;
     font-family: Arial;
     -webkit-app-region: no-drag;
-    transition: all ease-in-out .5s;
+    transition: all ease-in-out .3s;
     outline: none;
     user-select: none;
 }
@@ -22,17 +22,41 @@ body {
     box-shadow: 0px 0px 3px gray;
     text-align: left;
     vertical-align: top;
-    z-index: 10;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+#browserControls {
     display: inline-block;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#browserControls i {
+    display: inline-block;
+    opacity: .5;
+    vertical-align: top;
+}
+
+.gg-arrow-right-o, .gg-arrow-left-o {
+    margin-top: 4px;
+    margin-right: 5px;
+}
+
+.gg-redo {
+    margin-top: 8px;
+    margin-left: 5px;
 }
 
 #tabs {
     height: 30px;
-    width: calc(100% - 110px);
+    width: calc(100% - 210px);
     text-align: left;
     display: inline-block;
     -webkit-app-region: drag;
     color: rgb(131, 131, 131);
+    vertical-align: top;
 }
 
 #newTab {
@@ -69,6 +93,7 @@ body {
     line-height: 40px;
     vertical-align: top;
     max-width: 500px;
+    vertical-align: top;
 }
 
 .tab * {
@@ -98,19 +123,6 @@ body {
     margin-right: 8px;
 }
 
-.tab:hover > #tabControls {
-    opacity: 1;
-}
-
-#tabControls {
-    height: 100%;
-    display: none;
-    opacity: 0;
-}
-
-#tabControls i {
-    display: inline-block;
-}
 
 .tab #tabIcon {
     height: calc(100% - 10px);

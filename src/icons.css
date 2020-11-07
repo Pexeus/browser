@@ -52,7 +52,7 @@
     width: 22px;
     height: 22px;
     border: 2px solid;
-    transform: scale(var(--ggs,.9));
+    transform: scale(var(--ggs,1));
     border-radius: 22px
 }
 .gg-arrow-left-o::after,
@@ -78,6 +78,16 @@
     background: currentColor
 }
 
+.gg-arrow-left-o:hover {
+    opacity: .8;
+    border: 2px solid #9ab2f5;
+}
+
+.gg-arrow-left-o:hover .gg-arrow-left-o::after {
+    opacity: .8;
+    border: 2px solid #9ab2f5;
+}
+
 
 
 .gg-arrow-right-o {
@@ -86,8 +96,8 @@
     display: block;
     width: 22px;
     height: 22px;
-    border: 2px solid transparent;
-    transform: scale(var(--ggs,.9));
+    border: 2px solid;
+    transform: scale(var(--ggs,1));
     border-radius: 20px
 }
 .gg-arrow-right-o::after,
@@ -99,12 +109,12 @@
     right: 4px
 }
 .gg-arrow-right-o::after {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-top: 2px solid;
     border-right: 2px solid;
     transform: rotate(45deg);
-    bottom: 5px
+    bottom: 6px
 }
 .gg-arrow-right-o::before {
     width: 10px;
@@ -113,17 +123,17 @@
     background: currentColor
 }
 
-
 .gg-redo {
     box-sizing: border-box;
     position: relative;
     display: block;
-    transform: scale(var(--ggs,1));
+    transform: scale(var(--ggs,1.1));
     width: 14px;
     height: 14px;
     border: 2px solid;
     border-right-color: transparent;
-    border-radius: 100px
+    border-radius: 100px;
+    transform: rotate(30deg)
 }
 .gg-redo::before {
     content: "";
@@ -138,4 +148,3 @@
     right: -1px;
     transform: rotate(68deg)
 }
-

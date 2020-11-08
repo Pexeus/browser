@@ -37,11 +37,24 @@ body {
     display: inline-block;
     opacity: .5;
     vertical-align: top;
+    cursor: pointer;
 }
 
-.gg-arrow-right-o, .gg-arrow-left-o {
+
+.gg-arrow-right, .gg-arrow-left {
     margin-top: 4px;
-    margin-right: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+#browserControls i:hover {
+    transform: scale(1.1);
+}
+
+#browserControls .gg-redo:hover {
+    background-color: transparent;
 }
 
 .gg-redo {
@@ -133,6 +146,12 @@ body {
     vertical-align: top;
     opacity: .8;
     display: none;
+    cursor: pointer;
+}
+
+.tab #tabIcon:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0px 0px 1px gray);
 }
 
 .tab #closeTab {

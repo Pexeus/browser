@@ -1,4 +1,4 @@
-const storage = require("./storage");;
+const storage = require("./storage");
 
 module.exports = {
     tabs: {
@@ -80,12 +80,14 @@ function newTab(id) {
     $closeTab.src = "./img/close.png"
 
     let $tabIcon = vie.new("img", "#tabIcon")
+    
+    $tabIcon.addEventListener("click", () => {
+        reloadTab()
+    })
 
     let $loaderWrapper = vie.new("div", "#loaderWrapper")
     let $loader = vie.new("i", ".gg-spinner")
     $loaderWrapper.appendChild($loader)
-
-    console.log($loaderWrapper)
 
     $tab.addEventListener("click", () => {
         let tab = event.target
@@ -98,8 +100,6 @@ function newTab(id) {
         while (tab.classList[0] != "tab") {
             tab = tab.parentElement
         }
-
-        console.log(tab.classList)
 
         tabID = tab.id.match(/\d+/)[0]
 

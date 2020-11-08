@@ -1,26 +1,51 @@
 const storage = require("./storage")
-const head = require("./head")
 
 module.exports = {
+    //tab management
     views: {
         new: function (id) {
             newView(id)
         },
         to: function(tab) {
+            deactivateCurrentView()
             toView(tab)
         },
         close: function(tab) {
             vie.get("#" + tab.viewID).remove()
             delete storage.tabs.list[tab.id]
+        },
+        closeCurrent: function() {
+            deactivateCurrentView()
+        }
+    },
+    //bezieht sich immer auf den aktuellen tab
+    navigate: {
+        to: function(query) {
 
-            console.log(storage.tabs.list)
+        },
+        backward: function() {
+            $view = storage.active().domView
+
+            if ($view.canGoBack()) {
+                $view.goBack()
+            }
+        },
+        forward: function() {
+            $view = storage.active().domView
+
+            if ($view.canGoForward()) {
+                $view.goForward()
+            }
+        },
+        reload: function() {
+            $view = storage.active().domView
+
+            $view.reload()
         }
     }
 }
 
 function toView(tab) {
-    deactivateCurrentView()
-
     let $tab = vie.get("#" + tab.viewID)
     $tab.style.display = "inline-flex"
 
@@ -28,11 +53,11 @@ function toView(tab) {
 }
 
 function newView(id) {
-    deactivateCurrentView()
-
     const view = vie.new("webview", "#view_" + id)
     view.classList.add("webview")
     view.src = "https://www.google.com/"
+
+    storage.tabs.list[id].domView = view
 
     view.addEventListener("page-favicon-updated", () => {
         let favIcon = "https://" + (new URL(view.src)).hostname + "/favicon.ico"
@@ -40,7 +65,7 @@ function newView(id) {
         storage.tabs.list[id].icon = favIcon
         storage.tabs.list[id].status = "idle"
 
-        head.tabs.update()
+        updateHead()
     })
 
     view.addEventListener("dom-ready", () => {
@@ -49,27 +74,26 @@ function newView(id) {
         storage.tabs.list[id].icon = favIcon
         storage.tabs.list[id].title = view.getTitle()
 
-        head.tabs.update()
+        updateHead()
     })
 
     view.addEventListener("did-stop-loading", () => {
         storage.tabs.list[id].status = "idle"
 
-        head.tabs.update()
+        updateHead()
     })
 
     view.addEventListener("did-start-loading", () => {
         storage.tabs.list[id].status = "load-wait"
         storage.tabs.list[id].icon = undefined
 
-        head.tabs.update()
+        updateHead()
     })
 
     view.addEventListener("load-commit", () => {
         if (storage.tabs.list[id].status != "idle") {
-            console.log(storage.tabs.list[id].status)
             storage.tabs.list[id].status = "load-commit"
-            head.tabs.update()
+            updateHead()
         }
     })
 
@@ -77,12 +101,12 @@ function newView(id) {
 }
 
 function deactivateCurrentView() {
-    const currentTab = storage.tabs.active()
+    let currentView = storage.tabs.active()
 
-    if (currentTab != false) {
-        let $tab = vie.get("#" + currentTab.viewID)
-        $tab.style.display = "none"
+    if (currentView.domView != undefined) {
+        currentView.domView.style.display = "none"
+        storage.tabs.list[currentView.id].active = false
 
-        storage.tabs.list[currentTab.id].active = false
+        updateHead()
     }
 }

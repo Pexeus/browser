@@ -12,6 +12,9 @@ module.exports = {
     },
     get: function(query) {
         return getTab(query)
+    },
+    next: function(query) {
+        return nextTab(Object.keys(tabList), query)
     }
 }
 
@@ -27,6 +30,25 @@ function getTab(query) {
     })
 
     return result
+}
+
+function nextTab(array, num) {
+    let index = array.indexOf(String(num))
+    array.splice(index, 1)
+
+    console.log(array);
+
+    var i = 0;
+    var minDiff = 1000;
+    var ans;
+    for (i in array) {
+      var m = Math.abs(num - array[i]);
+      if (m < minDiff) {
+        minDiff = m;
+        ans = array[i];
+      }
+    }
+    return ans;
 }
 
 function getActiveTab() {
